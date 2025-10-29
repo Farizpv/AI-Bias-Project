@@ -1,26 +1,21 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-import re  # For basic text cleaning
-import nltk  # For more advanced cleaning
+import re  # For text cleaning
+import nltk  # For advanced cleaning
 from nltk.corpus import stopwords
 from collections import Counter
-import os  # To handle file paths
+import os
 
 # --- Configuration ---
-# Get the absolute path of the directory this script is in (e.g., .../AI-Bias-Project/scripts)
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# Go up one level to get the project's root directory (e.g., .../AI-Bias-Project)
 PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
 
-# Now, build the correct path to the data file from the project root
-CAPTION_FILE_PATH = os.path.join(PROJECT_ROOT, 'data', 'results.csv')  # Make sure 'results.csv' is the right name!
+CAPTION_FILE_PATH = os.path.join(PROJECT_ROOT, 'data', 'results.csv')
 
-# You can also make paths for your output plots
 OUTPUT_PATH = os.path.join(PROJECT_ROOT, 'outputs')
 
-# Define keywords for your roles (expand this list)
 KEYWORDS = ['doctor', 'nurse', 'teacher', 'engineer', 'scientist', 'chef', 'artist', 'builder', 'driver', 'pilot']
 
 
@@ -30,16 +25,15 @@ def load_data(filepath):
     """Loads the caption data, handling potential delimiter issues."""
     print(f"Attempting to load data from: {filepath}")
     try:
-        # *** FIX 1: ADDED skiprows=1 TO SKIP THE HEADER ROW ***
+        # skiprows=1 TO SKIP THE HEADER
         df = pd.read_csv(
             filepath,
             delimiter='|',
             header=None,
             names=['image_id', 'comment_number', 'caption'],
-            skiprows=1  # Skip the 'image_name, comment' header
+            skiprows=1
         )
 
-        # *** FIX 2: HANDLE THE 1 NULL CAPTION TO PREVENT ERRORS ***
         df['caption'] = df['caption'].fillna('')
 
         print("Data loaded successfully. Header skipped and nulls filled.")
@@ -54,14 +48,14 @@ def initial_data_stats(df):
     """Calculates and prints basic statistics about the dataframe."""
     if df is None: return
     print("\n--- Initial Data Characteristics ---")
-    # Now that we skipped the header, the total entries will be 1 less
+    # We skipped the header, so the total entries will be 1 less
     print(f"Total number of captions (entries): {len(df)}")
     print(f"Number of unique images: {df['image_id'].nunique()}")
     print(f"Columns: {df.columns.tolist()}")
     print("\nFirst 5 rows:")
     print(df.head())
     print("\nData Info:")
-    df.info()  # Shows data types and non-null counts
+    df.info()
 
 
 def clean_caption(text):
@@ -77,11 +71,11 @@ def clean_caption(text):
 
 def advanced_clean_caption(text):
     """More advanced cleaning: remove stopwords."""
-    text = clean_caption(text)  # Start with basic cleaning
+    text = clean_caption(text)
     try:
         # Check if stopwords are available
         nltk.data.find('corpora/stopwords')
-    except LookupError:  # *** FIX 3: CORRECTED THE EXCEPTION NAME ***
+    except LookupError:
         print("Downloading NLTK stopwords (one-time download)...")
         nltk.download('stopwords')
 
@@ -94,7 +88,7 @@ def advanced_clean_caption(text):
 def analyze_caption_length(df):
     """Analyzes and plots the distribution of caption lengths."""
     if df is None: return
-    # Create the 'caption_length' column *after* loading
+    # Create the 'caption_length' column after loading
     df['caption_length'] = df['caption'].apply(lambda x: len(str(x).split()))
 
     print("\n--- Caption Length Analysis ---")
@@ -121,7 +115,7 @@ def find_keywords(df, keywords):
     keyword_counts = {keyword: 0 for keyword in keywords}
     images_with_keywords = {keyword: set() for keyword in keywords}
 
-    # Apply cleaning before searching
+    # clean before searching
     print("\nApplying advanced cleaning to all captions (this may take a moment)...")
     df['cleaned_caption'] = df['caption'].apply(advanced_clean_caption)
     print("Advanced cleaning complete.")
@@ -167,14 +161,11 @@ def find_keywords(df, keywords):
     return unique_image_counts
 
 
-# --- Main Execution ---
 if __name__ == "__main__":
-    # Stage 1 Execution
     dataframe = load_data(CAPTION_FILE_PATH)
     initial_data_stats(dataframe)
     analyze_caption_length(dataframe)
 
-    # Stage 2 Execution
     keyword_results = find_keywords(dataframe, KEYWORDS)
 
     print("\n--- EDA Script Finished ---")

@@ -1,2 +1,2 @@
 # AI-Bias-Project
-Comparing demographic bias in Stable Diffusion vs. Flickr-30k.
+A big data analytics project, comparing demographic bias in Stable Diffusion vs. Flickr-30k dataset.

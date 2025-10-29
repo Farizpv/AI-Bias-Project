@@ -29,3 +29,5 @@ scripts/stable-diffusion-webui/embeddings/
 # OS-specific files
 .DS_Store
 Thumbs.db
+
+reports/

@@ -4,10 +4,8 @@ import seaborn as sns
 import re  # For text cleaning
 import nltk  # For advanced cleaning
 from nltk.corpus import stopwords
-from collections import Counter
 import os
 
-# --- Configuration ---
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)

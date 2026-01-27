@@ -9,9 +9,7 @@ venv/
 .ipynb_checkpoints/
 
 
-data/flickr30k_images/
-data/*.csv
-data/*.zip
+data/
 
 
 

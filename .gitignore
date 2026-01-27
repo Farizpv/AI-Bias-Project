@@ -1,33 +1,25 @@
-# Python virtual environment
+
 venv/
 .venv/
 
-# PyCharm specific files
+
 .idea/
 
-# Jupyter Notebook checkpoints
+
 .ipynb_checkpoints/
 
-# Downloaded data (too large for Git)
+
 data/flickr30k_images/
 data/*.csv
-# Add specific dataset file names/patterns if needed
+data/*.zip
 
-# Generated outputs (can be regenerated)
-outputs/generated_images/
-outputs/*.csv
-outputs/*.png
 
-# Downloaded AI models (huge)
+
 scripts/stable-diffusion-webui/models/
 scripts/stable-diffusion-webui/embeddings/
-# Adjust if your SD WebUI path is different
 
-# DeepFace downloaded weights
 *.deepface/weights/
 
-# OS-specific files
 .DS_Store
 Thumbs.db
 
-reports/

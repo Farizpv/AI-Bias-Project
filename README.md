@@ -11,7 +11,7 @@ This project performs a statistical **"stress test" on Stable Diffusion v1.5**. 
 
 ---
 
-## 📊 The Key Result
+## The Key Result
 
 The data reveals a massive **"Caricature Effect."** Where reality shows nuance, the AI deals in absolutes.
 

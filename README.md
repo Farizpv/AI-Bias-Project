@@ -1,4 +1,4 @@
-# 🤖 Artificial vs. Reality: Quantifying Gender Bias in Generative AI
+# Artificial vs. Reality: Quantifying Gender Bias in Generative AI
 
 ![Python](https://img.shields.io/badge/Python-3.9%2B-blue?style=for-the-badge&logo=python)
 ![AI](https://img.shields.io/badge/GenAI-Stable%20Diffusion%20v1.5-orange?style=for-the-badge)
@@ -11,14 +11,14 @@ This project performs a statistical **"stress test" on Stable Diffusion v1.5**. 
 
 ---
 
-## 📊 The "Money Shot" (Key Result)
+## 📊 The Key Result
 
 The data reveals a massive **"Caricature Effect."** Where reality shows nuance, the AI deals in absolutes.
 
 ![Bias Comparison Chart](outputs/bias_comparison.png)
 *(Red = AI Generated | Blue = Real World Baseline)*
 
-### 🚨 Shocking Findings
+### Important Findings
 | Role | Real World (% Female) | AI World (% Female) | The "Bias Delta" |
 | :--- | :---: | :---: | :--- |
 | **Nurse** | ~56% | **100%** | **+44%** (Hyper-Feminization) |
@@ -29,9 +29,9 @@ The data reveals a massive **"Caricature Effect."** Where reality shows nuance, 
 
 ---
 
-## 🛠️ System Architecture
+## System Architecture
 
-This isn't just a prompt test; it's a full **ETL (Extract, Transform, Load)** and Analysis pipeline.
+This isn't just a prompt test, it's a full **ETL (Extract, Transform, Load)** and Analysis pipeline.
 ```mermaid
 graph LR
     A[Flickr30k Dataset] -->|filter_and_extract.py| B(Real Images)
@@ -59,13 +59,13 @@ graph LR
    Filtering: Images where faces are not detected (low confidence) are automatically discarded to maintain data integrity.
 4. The Verdict (visualize.py)
    Goal: Statistical Proof
-   We merge the datasets (compare_images.py).We calculate the Gender Gap Delta
+   We merge the datasets (compare_images.py). We calculate the Gender Gap Delta
    ```Delta = AI_{%} - Real_{%}```
    Results are visualised using Matplotlib/Seaborn to show the "Amplification" of bias.
 
 
 ```markdown
-## 📂 Repository Structure
+## Repository Structure
 ├── data/
 │   ├── archive.zip            # Raw Flickr30k data (ignored in git)
 │   ├── real_images/           # Extracted Flickr images
@@ -96,7 +96,7 @@ graph LR
 └── README.md
 ```
 
-## 🚀 How to Run:
+## How to Run:
 Prerequisites:
 Python 3.9+
 CUDA-enabled GPU (recommended for Image Generation; CPU is supported but slow)
@@ -121,12 +121,12 @@ Execution Steps
    ```
    python scripts/visualize.py
    ```
-## 🔮 Future Work & Limitations
+## Future Work & Limitations
 1. Mitigation: The next phase involves writing a script for "Counter-Prompting", automatically injecting diversity keywords (e.g., "A female doctor") to force a balanced output.
 2. Newer Models: Testing SDXL and DALL-E 3 to see if RLHF (Reinforcement Learning from Human Feedback) has reduced these biases or merely hidden them.
 3. Sample Size: Some Flickr categories (e.g., "Builder") were too small (<10 images) to be statistically significant and were excluded from the final graph.
 
-# 👨‍💻 Author
+# Author
 Muhammed Fariz Palli Valappil
 Focus: Responsible AI, Computer Vision, Data Engineering
 Location: Warsaw, Poland
